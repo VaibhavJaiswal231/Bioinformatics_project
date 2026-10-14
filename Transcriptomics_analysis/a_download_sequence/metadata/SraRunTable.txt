@@ -1,0 +1,2 @@
+Run, Sample, Organism, Layout, Platform
+SRR390728, Sample1, Homo sapiens, PAIRED, Illumina

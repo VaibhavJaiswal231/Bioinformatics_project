@@ -1,0 +1,16 @@
+project:
+  name: "Transcriptomics_analysis"
+
+input:
+  accession_file: "metadata/accession_list.txt"
+
+output:
+  sra_dir: "raw_sra"
+  fastq_dir: "fastq"
+  log_dir: "logs"
+  sra_run_table: "SraRunTable.txt"
+  sample_sheet: "sample_sheet.csv"
+
+sra:
+  validate: true
+  split_files: true
