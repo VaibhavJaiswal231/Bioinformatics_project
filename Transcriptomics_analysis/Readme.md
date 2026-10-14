@@ -18,29 +18,29 @@ This project implements an RNA-seq transcriptomics analysis workflow, starting f
 
 ## Planned Workflow
 
-SRA → FASTQ → FastQC/MultiQC → Trimming → FastQC/MultiQC → Alignment → Quantification → Differential Expression → Pathway Analysis
+SRA → FASTQ → FastQC/MultiQC → Trimming(if needed) → FastQC/MultiQC(if trimming performed) → Alignment → Quantification → Differential Expression → Pathway Analysis
 
 ## Tools
 
-SRA Toolkit
-FastQC
-MultiQC
-STAR
-featureCounts
-DESeq2
-GSVA
-GSEA
-Python
-R
-Snakemake
+- SRA Toolkit
+- FastQC
+- MultiQC
+- STAR
+- featureCounts
+- DESeq2
+- GSVA
+- GSEA
+- Python
+- R
+- Snakemake
 
 ## Project Structure
 
-a_download_sequence/          Raw sequence acquisition
-b_qc_downloading_sequence/    FASTQ quality control
-c_trimming/                   Read preprocessing
-d_qc_trimming_sequence/       Trimming quality check
-e_alignment/                  Read alignment
-f_quantification/             Expression quantification
-g_differential_expression/    Differential expression
-h_pathway_analysis/           Pathway analysis
+- a_download_sequence/          Raw sequence acquisition
+- b_qc_downloading_sequence/    FASTQ quality control 
+- c_trimming/                   Read preprocessing
+- d_qc_trimming_sequence/       Trimming quality check
+- e_alignment/                  Read alignment
+- f_quantification/             Expression quantification
+- g_differential_expression/    Differential expression
+- h_pathway_analysis/           Pathway analysis
