@@ -66,4 +66,5 @@ This repository documents practical bioinformatics workflows and projects develo
 ## Author
 
 **Vaibhav Jaiswal**
+
 Bioinformatics Engineer & Computational Biologist | Multi-Omics Analysis | ML for Healthcare
