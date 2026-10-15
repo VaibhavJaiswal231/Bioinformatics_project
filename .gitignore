@@ -76,8 +76,9 @@ Thumbs.db
 
 # ==========================================
 # Local FastQC installation
-Transcriptomics_analysis/FastQC/
 # ==========================================
+Transcriptomics_analysis/FastQC/
+Transcriptomics_analysis/STAR_2.7.11b/
 
 # ==========================================
 # IDE

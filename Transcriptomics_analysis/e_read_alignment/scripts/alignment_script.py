@@ -11,6 +11,7 @@ import yaml
 SCRIPT_DIR = Path(__file__).resolve().parent
 BASE_DIR = SCRIPT_DIR.parent
 PROJECT_DIR = BASE_DIR.parent
+STAR = PROJECT_DIR / "STAR_2.7.11b" / "STAR_2.7.11b" / "Linux_x86_64_static" / "STAR"
 
 CONFIG_FILE = BASE_DIR / "config" / "config.yaml"
 ACCESSION_FILE = PROJECT_DIR / "a_download_sequence" / "metadata" / "accession_list.txt"
@@ -106,7 +107,7 @@ for number, accession in enumerate(accessions, start=1):
     read_length = len(sequence)
     sjhang = read_length - 1
 
-    command_star_alignment = ["STAR", 
+    command_star_alignment = [STAR, 
                               "--runThreadN", int(THREAD), 
                               "--runMode", "genomeGenerate",
                               "--genomeDir", str(GENOME_DIR),
@@ -140,6 +141,5 @@ for number, accession in enumerate(accessions, start=1):
 
         print(f"STAR alignment failed: {accession}")
         print(f"Check log: {log_file}")
-
 
 print("\nSTAR alignment pipeline completed.")
