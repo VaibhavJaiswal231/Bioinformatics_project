@@ -1,0 +1,10 @@
+project:
+  name: "Transcriptomics_analysis"
+  subname: "Alignment"
+
+input:
+  THREAD: 4
+
+output:
+  log_dir: "logs"
+  results_dir: "results"

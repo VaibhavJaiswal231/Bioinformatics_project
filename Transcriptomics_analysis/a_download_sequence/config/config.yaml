@@ -1,5 +1,6 @@
 project:
   name: "Transcriptomics_analysis"
+  subname: "Downloading RNA-seq data"
 
 input:
   accession_file: "metadata/accession_list.txt"

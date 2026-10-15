@@ -38,6 +38,7 @@ with open(CONFIG_FILE, "r", encoding="utf-8") as file:
 # ============================================================
 
 project_name = config["project"]["name"]
+project_subname = config["project"]["subname"]
 configured_base_dir = Path(BASE_DIR)
 
 accession_file = configured_base_dir / config["input"]["accession_file"]
@@ -231,7 +232,7 @@ log_file = log_dir / f"download_summary_{timestamp}.txt"
 
 with open(log_file, "w", encoding="utf-8") as file:
 
-    file.write(f"Project: {project_name}\n")
+    file.write(f"Project: {project_name}, Step: {project_subname}\n")
     file.write(f"Date: {datetime.now()}\n")
     file.write("=" * 70 + "\n\n")
 
