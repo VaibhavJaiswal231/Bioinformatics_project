@@ -60,11 +60,10 @@ for fastq in fastq_files:
 # ============================================================
 # Run multiqc
 # ============================================================
+
 print(f"-"*35 + "Running MultiQC" + '-'*35)
 
 MULTIQC_DIR.mkdir(parents=True, exist_ok=True)
 
 multiqc_command = ["multiqc", str(FASTQC_DIR), "--outdir", str(MULTIQC_DIR), "--filename", "multiqc_report.html","--force"]      
 result_multiqc = subprocess.run(multiqc_command)
-                    
-

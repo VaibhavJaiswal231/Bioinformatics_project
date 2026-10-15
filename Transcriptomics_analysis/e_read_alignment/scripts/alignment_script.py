@@ -1,7 +1,7 @@
 from pathlib import Path
 import subprocess
 import sys
-import datetime
+from datetime import datetime
 import yaml
 
 # ============================================================
@@ -11,7 +11,7 @@ import yaml
 SCRIPT_DIR = Path(__file__).resolve().parent
 BASE_DIR = SCRIPT_DIR.parent
 PROJECT_DIR = BASE_DIR.parent
-STAR = PROJECT_DIR / "STAR_2.7.11b" / "STAR_2.7.11b" / "Linux_x86_64_static" / "STAR"
+STAR = PROJECT_DIR / "STAR_2.7.11b" / "Linux_x86_64_static" / "STAR"
 
 CONFIG_FILE = BASE_DIR / "config" / "config.yaml"
 ACCESSION_FILE = PROJECT_DIR / "a_download_sequence" / "metadata" / "accession_list.txt"
@@ -77,8 +77,36 @@ if not accessions:
 
 
 # ============================================================
-# 4. RUN STAR AND CREATE LOG FILE
+# 4. GENERATE THE STAR GENOME INDEX
 # ============================================================ 
+
+print("Generate STAR genome index")
+
+genome_command = [
+    str(STAR),
+    "--runThreadN", str(THREAD),
+    "--runMode", "genomeGenerate",
+    "--genomeDir", str(GENOME_DIR),
+    "--genomeFastaFiles", str(GENOME_FASTA),
+    "--sjdbGTFfile", str(GTF_FILE),
+    "--sjdbOverhang", str(149)
+]
+
+try:
+
+    subprocess.run(genome_command, check=True)
+    print("STAR genome index generated successfully.")
+
+except subprocess.CalledProcessError:
+
+    print("ERROR: STAR genome index generation failed.")
+    sys.exit(1)
+
+# ============================================================
+# 5. ALIGN READS AND GENERATING GENE COUNTS
+# ============================================================ 
+
+print("Aligning reads and generating gene counts\n\n")
 
 for number, accession in enumerate(accessions, start=1):
 
@@ -86,11 +114,11 @@ for number, accession in enumerate(accessions, start=1):
     print(f"[{number}/{len(accessions)}] Aligning: {accession}")
     print("-" * 70)
 
-    OUTPUT_FOLDER = f"{OUTPUT_DIR}/{accession}"
+    OUTPUT_FOLDER = OUTPUT_DIR / accession
     OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
 
-    READ1=f"{FASTQ_DIR}/{accession}_1.fastq"
-    READ2=f"{FASTQ_DIR}/{accession}_2.fastq"
+    READ1= FASTQ_DIR / f"{accession}_1.fastq"
+    READ2= FASTQ_DIR  /f"{accession}_2.fastq"
 
     if not READ1.exists():
         print(f"Skipping {accession}: R1 file not found")
@@ -100,46 +128,37 @@ for number, accession in enumerate(accessions, start=1):
         print(f"Skipping {accession}: R2 file not found")
         continue
 
-    with open(READ1, "r") as f:
-        f.readline()
-        sequence = f.readline().strip()
-
-    read_length = len(sequence)
-    sjhang = read_length - 1
-
-    command_star_alignment = [STAR, 
-                              "--runThreadN", int(THREAD), 
-                              "--runMode", "genomeGenerate",
-                              "--genomeDir", str(GENOME_DIR),
-                              "--genomeFastaFiles", str(GENOME_FASTA), 
+    command_star_alignment = [str(STAR), 
+                              "--runThreadN", str(THREAD), 
+                              "--runMode", "alignReads",
+                              "--genomeDir", str(GENOME_DIR), 
                               "--readFilesIn", str(READ1), str(READ2), 
                               "--twopassMode", "Basic",
-                              "--outFileNamePrefix", f"OUTPUT_FOLDER/{accession}_", 
+                              "--outFileNamePrefix", str(OUTPUT_FOLDER / f"{accession}_"), 
                               "--outSAMtype", "BAM", "SortedByCoordinate", 
-                              "--quantMode", "TranscriptomeSAM", "GeneCounts"
-                              "--sjdbGTFfiles", str(GTF_FILE),
-                              "--sjdbOverhang", sjhang]
-    
-
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = LOG_DIR / f"Alignment_summary_{timestamp}.txt"
+                              "--quantMode", "TranscriptomeSAM", "GeneCounts"]
     
     try:
 
-        with open(log_file, "w") as log:
-
-            subprocess.run(
-                command_star_alignment,
-                stdout=log,
-                stderr=subprocess.STDOUT,
-                check=True
-            )
-
+        subprocess.run(command_star_alignment, stderr=subprocess.STDOUT, check=True)
         print(f"Alignment completed: {accession}")
 
     except subprocess.CalledProcessError:
 
         print(f"STAR alignment failed: {accession}")
-        print(f"Check log: {log_file}")
+
+
+# ============================================================
+# 6. LOGS
+# ============================================================ 
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file = LOG_DIR / f"Alignment_summary_{timestamp}.txt"
+
+print("\n")
+print("=" * 70)
+print("STAR alignment pipeline completed.")
+print("=" * 70)
+print(f"Check log: {log_file}")
 
 print("\nSTAR alignment pipeline completed.")
