@@ -9,12 +9,12 @@ This project implements an RNA-seq transcriptomics analysis workflow, starting f
 - [x] Raw sequence download
 - [x] FastQC
 - [x] MultiQC
-- [ ] Trimming(if needed)
+- [x] Trimming(if needed)
+- [x] Post Trimming QC(if needed)
 - [x] Alignment
 - [x] Quantification
 - [x] Differential expression
 - [ ] Pathway analysis
-- [ ] Final interpretation
 
 ## Planned Workflow
 
