@@ -39,6 +39,9 @@ outputs/
 # Reference files
 # ==========================================
 Transcriptomics_analysis/e_read_alignment/data/reference/
+Transcriptomics_analysis/c_trimming/logs/
+Transcriptomics_analysis/c_trimming/reports/
+Transcriptomics_analysis/c_trimming/results/
 
 # ==========================================
 # Logs
@@ -75,11 +78,9 @@ venv/
 Thumbs.db
 
 # ==========================================
-# Local FastQC installation
+# Local tools installation
 # ==========================================
-Transcriptomics_analysis/FastQC/
-Transcriptomics_analysis/STAR_2.7.11b/
-
+Transcriptomics_analysis/tools/
 # ==========================================
 # IDE
 # ==========================================

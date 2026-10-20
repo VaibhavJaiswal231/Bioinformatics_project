@@ -14,7 +14,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 BASE_DIR = SCRIPT_DIR.parent
 PROJECT_DIR = BASE_DIR.parent
 
-FASTQC_BASE = PROJECT_DIR / "FastQC" / "fastqc"
+FASTQC_BASE = PROJECT_DIR / "tools" / "FastQC" / "fastqc"
 
 FASTQ_DIR = PROJECT_DIR / "a_download_sequence" / "fastq"
 

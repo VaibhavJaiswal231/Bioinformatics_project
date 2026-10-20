@@ -11,7 +11,7 @@ import yaml
 SCRIPT_DIR = Path(__file__).resolve().parent
 BASE_DIR = SCRIPT_DIR.parent
 PROJECT_DIR = BASE_DIR.parent
-STAR = PROJECT_DIR / "STAR_2.7.11b" / "Linux_x86_64_static" / "STAR"
+STAR = PROJECT_DIR / "tools" / "STAR_2.7.11b" / "Linux_x86_64_static" / "STAR"
 
 CONFIG_FILE = BASE_DIR / "config" / "config.yaml"
 ACCESSION_FILE = PROJECT_DIR / "a_download_sequence" / "metadata" / "accession_list.txt"
