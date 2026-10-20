@@ -95,7 +95,7 @@ dds.deseq2()
 
 # Change these names to exactly match metadata["condition"]
 
-stat_res = DeseqStats(dds, contrast=["condition", "tumor", "control"])
+stat_res = DeseqStats(dds, contrast=["condition", "treatment", "control"])
 stat_res.summary()
 
 

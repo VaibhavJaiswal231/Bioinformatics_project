@@ -9,7 +9,7 @@ This project implements an RNA-seq transcriptomics analysis workflow, starting f
 - [x] Raw sequence download
 - [x] FastQC
 - [x] MultiQC
-- [ ] Trimming
+- [ ] Trimming(if needed)
 - [x] Alignment
 - [x] Quantification
 - [x] Differential expression
